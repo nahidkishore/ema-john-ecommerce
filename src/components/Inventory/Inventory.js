@@ -3,7 +3,7 @@ import React from 'react';
 
 const Inventory = () => {
   const handleAddProduct=() =>{
-   fetch('http://localhost:5000/addProduct',{
+   fetch('http://localhost:5000/addProducts',{
      method: 'POST',
      headers: {
        'Content-Type': 'application/json'
