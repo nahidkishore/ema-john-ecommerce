@@ -12,7 +12,8 @@ const Shop = () => {
 const [products, setProducts]=useState([]);
 
 const [cart,setCart]=useState([]);
-
+// update title based on components
+document.title="Shop more";
 
 useEffect(() =>{
 fetch('https://serene-sea-68053.herokuapp.com/products')

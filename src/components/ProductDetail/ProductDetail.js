@@ -7,6 +7,8 @@ const ProductDetail = () => {
   const {productKey}=useParams();
   const [loading,setLoading] = useState(true);
   const [product,setProduct]=useState({});
+// update title based on components
+document.title="product detail";
 
   useEffect(()=>{
    fetch('https://serene-sea-68053.herokuapp.com/product/'+productKey)
