@@ -31,7 +31,7 @@ const history=useHistory();
     const savedCart = getDatabaseCart();
     const productKeys = Object.keys(savedCart);
 
-      fetch('http://localhost:5000/productsByKeys',{
+      fetch('https://serene-sea-68053.herokuapp.com/productsByKeys',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
