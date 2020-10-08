@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import "./Shipment.css";
 import { UserContext } from "../../App";
@@ -8,12 +8,18 @@ import ProcessPayment from "../ProcessPayment/ProcessPayment";
 const Shipment = () => {
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
   const { register, handleSubmit, watch, errors } = useForm();
+  const [shippingData,setShippingData] = useState(null)
   const onSubmit = (data) => {
+   setShippingData(data);
+  };
+
+  const handlePaymentSuccess =paymentId=>{
     const savedCart = getDatabaseCart();
     const orderDetails = {
       ...loggedInUser,
       products: savedCart,
-      shipment: data,
+      shipment: shippingData,
+      paymentId,
       orderTime: new Date(),
     };
 
@@ -31,13 +37,12 @@ const Shipment = () => {
           alert("your order placed successfully");
         }
       });
-  };
-
+  }
   console.log(watch("example")); // watch input value by passing the name of it
 
   return (
    <div className="row">
-     <div className="col-md-6">
+     <div style={{display: shippingData? 'none' : 'block'}} className="col-md-6">
      <form className="ship-form" onSubmit={handleSubmit(onSubmit)}>
       <input
         name="name"
@@ -72,9 +77,9 @@ const Shipment = () => {
       <input type="submit" />
     </form>
      </div>
-     <div className="col-md-6">
+     <div style={{display: shippingData? 'block' : 'none'}}  className="col-md-6">
        <h2>Please pay your bill</h2>
-       <ProcessPayment></ProcessPayment>
+       <ProcessPayment handlePayment={handlePaymentSuccess}></ProcessPayment>
      </div>
    </div>
   );
