@@ -35,7 +35,7 @@ const setUserToken = () => {
     .auth()
     .currentUser.getIdToken(/* forceRefresh */ true)
     .then(function (idToken) {
-      sessionStorage("token", idToken);
+      sessionStorage.setItem("token", idToken);
     })
     .catch(function (error) {
       // Handle error
